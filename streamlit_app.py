@@ -12,6 +12,7 @@ streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
 # Display the table on the page.
 streamlit.dataframe(my_fruit_list)
 
+
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.fetchall()
 my_cur.execute("SELECT * from fruit_load_list")
@@ -20,7 +21,7 @@ streamlit.header("The fruit load list contains")
 streamlit.dataframe(my_data_rows)
 
 
-
+my_cur.execute("insert into fruit_load_list values('from streamlist')")
 import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
 streamlit.text(fruityvice_response)
